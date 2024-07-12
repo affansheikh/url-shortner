@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /urls/identifier:
+    post:
+      tags:
+      - create-url-identifier
+      operationId: createIdentifier
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIdentifierRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseUrlIdentifier"
+  /urls/{urlIdentifier}:
+    get:
+      tags:
+      - get-url
+      operationId: getFullUrl
+      parameters:
+      - name: urlIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResponseUrl"
+components:
+  schemas:
+    CreateIdentifierRequest:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+    ResponseUrlIdentifier:
+      required:
+      - identifier
+      type: object
+      properties:
+        identifier:
+          type: integer
+          format: int32
+    ResponseUrl:
+      required:
+      - url
+      type: object
+      properties:
+        url:
+          type: string
