@@ -1,7 +1,10 @@
 package org.example.urlshortner.domain.model
 
 @JvmInline
-value class Url(val value: String)
+value class Url(val url: String)
 
 @JvmInline
-value class ShortUrl(val value: String)
+value class UrlIdentifier(val identifier: Int)
+
+
+fun String.toUrl() = Url(this)
