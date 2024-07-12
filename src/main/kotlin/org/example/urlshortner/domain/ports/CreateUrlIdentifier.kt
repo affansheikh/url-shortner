@@ -1,8 +1,9 @@
 package org.example.urlshortner.domain.ports
 
-import org.example.urlshortner.domain.model.UrlIdentifier
-import org.example.urlshortner.domain.model.Url
+import org.example.urlshortner.adapters.incoming.CreateIdentifierRequest
+import org.example.urlshortner.adapters.incoming.ResponseUrlIdentifier
+import org.springframework.http.ResponseEntity
 
 interface CreateUrlIdentifier {
-    fun createIdentifier(url: Url): UrlIdentifier
+    fun createIdentifier(createIdentifierRequest: CreateIdentifierRequest): ResponseEntity<ResponseUrlIdentifier>
 }
