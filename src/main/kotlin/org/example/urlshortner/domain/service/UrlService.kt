@@ -18,7 +18,9 @@ class UrlService(
         urlRepository.addUrl(hashedUrl, url.url)
     }
 
+    @Cacheable(cacheNames = ["urls"], key = "#urlIdentifier", cacheManager = "urlCacheManager")
     fun getFullUrl(urlIdentifier: UrlIdentifier) = urlRepository.findByIdentifier(urlIdentifier.identifier)?.toUrl()
 
+    @CacheEvict(cacheNames = ["urls"], key = "#urlIdentifier", cacheManager = "urlCacheManager")
     fun deleteUrl(urlIdentifier: UrlIdentifier): Boolean = urlRepository.deleteUrl(urlIdentifier.identifier)
 }
